@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'oidc_logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="http://0.0.0.0:8080/realms/my_blog/protocol/openid-connect/auth?client_id=account-console&redirect_uri=http%3A%2F%2F0.0.0.0%3A8080%2Frealms%2Fmy_blog%2Faccount%2F&state=8a851cfd-ce6c-4bb9-825b-9fdaacc472c6&response_mode=query&response_type=code&scope=openid&nonce=e647398e-c2e8-4f92-9d3d-77f36f91e61a&code_challenge=YnA08PeD3714u1zTsSnXfztwBFQb5rP7B9v5ylaqZwQ&code_challenge_method=S256">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Site</p>
+    </footer>
+</body>
+</html>
