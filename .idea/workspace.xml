@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b09ca0e-442d-48c7-8fa6-2a3a59b50b79" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/myproject/pages/home_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myproject/pages/login_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myproject/pages/registration_page.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myproject/tests/test_login.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myproject/tests/test_reg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/chromedriver/chromedriver-linux64/test_login.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/pages/base_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/myapp/templates/myapp/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myapp/templates/myapp/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/myapp/templates/myapp/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myapp/templates/myapp/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/myproject/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myproject/docker-compose.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="3b09ca0e-442d-48c7-8fa6-2a3a59b50b79" name="Changes" comment="Initial commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,6 +73,19 @@
       <option name="presentableId" value="Default" />
       <updated>1717756415459</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1718040576618</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718040576618</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>
 </project>
