@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b09ca0e-442d-48c7-8fa6-2a3a59b50b79" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/myproject/myapp/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myproject/myapp/serrializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myproject/myapp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/myapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myapp/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/myapp/templates/myapp/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myapp/templates/myapp/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/myapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myapp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/myapp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myapp/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/myapp/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myapp/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myproject/myproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myproject/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myproject/myproject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myproject/urls.py" afterDir="false" />
     </list>
@@ -72,6 +68,7 @@
     "Python.settings.executor": "Run",
     "Python.test_login.executor": "Run",
     "Python.tests.executor": "Run",
+    "Python.urls.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "test",
     "settings.editor.selected.configurable": "terminal"

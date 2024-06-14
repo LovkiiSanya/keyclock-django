@@ -43,32 +43,10 @@ INSTALLED_APPS = [
     'mozilla_django_oidc',
     'myapp',
     'rest_framework',
-    'rest_framework_simplejwt',
     'django_filters',
+    'django_keycloak.apps.KeycloakAppConfig',
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-}
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': True,
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'VERIFYING_KEY': None,
-    'AUDIENCE': None,
-    'ISSUER': None,
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
-    'JTI_CLAIM': 'jti',
-}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,8 +55,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'mozilla_django_oidc.middleware.SessionRefresh',
+    'django_keycloak.middleware.BaseKeycloakMiddleware',
+
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -154,20 +133,34 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
 AUTHENTICATION_BACKENDS = (
     'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'django_keycloak.auth.backends.KeycloakAuthorizationCodeBackend',
 )
 
 OIDC_RP_CLIENT_ID = 'my_blog'
 OIDC_RP_CLIENT_SECRET = 'zlaT0yLM2o9sULphH1c1vBnlEMTaDTpO'
-OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://0.0.0.0:8080/realms/my_blog/broker/oidc/endpoint'
+OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://localhost:8080/realms/my_blog/protocol/openid-connect/auth'
 OIDC_OP_TOKEN_ENDPOINT = 'http://localhost:8080/realms/my_blog/protocol/openid-connect/token'
 OIDC_OP_USER_ENDPOINT = 'http://localhost:8080/realms/my_blog/protocol/openid-connect/userinfo'
 OIDC_OP_JWKS_ENDPOINT = 'http://localhost:8080/realms/my_blog/protocol/openid-connect/certs'
+OIDC_RP_SIGN_ALGO = 'RS256'
 
 LOGIN_URL = '/oidc/authenticate/'
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/'
 LOGOUT_URL = '/oidc/logout/'
 LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/'
+
 
