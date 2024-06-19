@@ -4,13 +4,13 @@ from myproject.pages.base_page import BasePage
 
 
 class LoginPage(BasePage):
-    login_btn = "Login"
+    login_btn = "/html/body/header/nav/ul/li[1]/a"
     username_input = "username"
     password_input = "password"
     sign_btn = '//input[@name="login"]'
 
     def click_login_button(self):
-        login_button = self.find_element(By.LINK_TEXT, self.login_btn)
+        login_button = self.find_element(By.XPATH, self.login_btn)
         login_button.click()
 
     def enter_username(self, username):

@@ -1,8 +1,19 @@
-            {% extends 'myapp/base.html' %}
-
-            {% block title %}Home{% endblock %}
-
-            {% block content %}
-                <h1>Welcome to My Site</h1>
-                <p>This is the home page.</p>
-            {% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome to the Home Page</h1>
+    {% if userinfo %}
+        <p>Hello, {{ userinfo.given_name }} {{ userinfo.family_name }}!</p>
+        <p>Email: {{ userinfo.email }}</p>
+        <p><a href="{% url 'logout' %}">Logout</a></p>
+    {% else %}
+        <p>You are not logged in.</p>
+        <a href="{% url 'login_page' %}">Login</a>
+        <a href="{% url 'keycloak_login' %}">Login with Keycloak</a>
+    {% endif %}
+</body>
+</html>

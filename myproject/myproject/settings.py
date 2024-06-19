@@ -10,15 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from pathlib import Path
-import os
 import logging
-from datetime import timedelta
+from pathlib import Path
 
 logging.basicConfig(level=logging.DEBUG)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -32,6 +30,17 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
+KEYCLOAK_CONFIG = {
+    'SERVER_URL': 'http://localhost:8080/auth/',
+    'CLIENT_ID': 'my_blog',
+    'REALM': 'my_blog',
+    'CLIENT_SECRET_KEY': 'zlaT0yLM2o9sULphH1c1vBnlEMTaDTpO',
+    'USE_SESSION': True,
+    'LOGOUT_REDIRECT_URL': '/',
+    'OIDC_AUTHENTICATION_INIT_URL': 'http://0.0.0.0:8080/realms/my_blog/account/',
+    'OIDC_AUTHENTICATION_REDIRECT_URL': '/keycloak/callback',
+    'OIDC_USERINFO': True,
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,11 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mozilla_django_oidc',
     'myapp',
     'rest_framework',
-    'django_filters',
-    'django_keycloak.apps.KeycloakAppConfig',
+    'rest_framework_simplejwt',
+    'django_keycloak',
 ]
 
 MIDDLEWARE = [
@@ -55,9 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'mozilla_django_oidc.middleware.SessionRefresh',
-    'django_keycloak.middleware.BaseKeycloakMiddleware',
-
+    'myapp.middleware.KeycloakTokenMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -65,7 +71,7 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +85,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_SECURE = True
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -137,30 +144,26 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
 AUTHENTICATION_BACKENDS = (
     'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',
-    'django_keycloak.auth.backends.KeycloakAuthorizationCodeBackend',
 )
 
-OIDC_RP_CLIENT_ID = 'my_blog'
-OIDC_RP_CLIENT_SECRET = 'zlaT0yLM2o9sULphH1c1vBnlEMTaDTpO'
-OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://localhost:8080/realms/my_blog/protocol/openid-connect/auth'
-OIDC_OP_TOKEN_ENDPOINT = 'http://localhost:8080/realms/my_blog/protocol/openid-connect/token'
-OIDC_OP_USER_ENDPOINT = 'http://localhost:8080/realms/my_blog/protocol/openid-connect/userinfo'
-OIDC_OP_JWKS_ENDPOINT = 'http://localhost:8080/realms/my_blog/protocol/openid-connect/certs'
-OIDC_RP_SIGN_ALGO = 'RS256'
+CLIENT_ID = "my_blog"
+CLIENT_SECRET = "zlaT0yLM2o9sULphH1c1vBnlEMTaDTpO"
+REALM_NAME = "my_blog"
+KEYCLOAK_URL_BASE = "http://localhost:8080/auth/"
+KEYCLOAK_AUDIENCE = "account"
+KEYCLOAK_IS_CREATE = 1
 
-LOGIN_URL = '/oidc/authenticate/'
-LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/'
-LOGOUT_URL = '/oidc/logout/'
-LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/'
-
-
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

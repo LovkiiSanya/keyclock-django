@@ -4,7 +4,7 @@ from myproject.pages.home_page import HomePage
 
 
 class RegistrationPage(BasePage):
-    login_btn = "Login"
+    login_btn = "/html/body/header/nav/ul/li[1]/a"
     register_start_btn = "Register"
     username_input = '//input[@name="username"]'
     password_input = '//input[@name="password"]'
@@ -15,7 +15,7 @@ class RegistrationPage(BasePage):
     register_btn = '//input[@value="Register"]'
 
     def click_login_button(self):
-        login_button = self.find_element(By.LINK_TEXT, self.login_btn)
+        login_button = self.find_element(By.XPATH, self.login_btn)
         login_button.click()
 
     def click_first_register_button(self):
