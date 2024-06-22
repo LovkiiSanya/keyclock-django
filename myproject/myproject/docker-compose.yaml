@@ -15,7 +15,7 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     container_name: keycloak
-    command: ["start-dev"]
+    command: [ 'start-dev','--import-realm' ]
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
@@ -26,12 +26,13 @@ services:
       DB_PASSWORD: password
       KEYCLOAK_LOGLEVEL: DEBUG
       PROXY_ADDRESS_FORWARDING: "true"
+      KC_FEATURES: scripts
     ports:
       - "8080:8080"
     depends_on:
       - postgres
     volumes:
-      - keycloak_data:/opt/keycloak/data
+      - ./keyclock/realm-export.json:/opt/keycloak/data/import/realm-export.json
 
 volumes:
   postgres_data:
