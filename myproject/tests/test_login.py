@@ -6,18 +6,18 @@ import time
 from myproject.pages.home_page import HomePage
 from myproject.pages.login_page import LoginPage
 
-
+#LOX
 class TestLogin(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        driver_path = '/home/sanya/django/keyclock/myproject/chromedriver/chromedriver-linux64/chromedriver'
+        driver_path = '/Users/evlezkov/PycharmProjects/keyclock-djangoclone/myproject/grivepaht/chromedriver'
         service = Service(driver_path)
         options = Options()
         cls.driver = webdriver.Chrome(service=service, options=options)
         cls.driver.maximize_window()
 
     def test_login(self):
-        self.driver.get('http://127.0.0.1:8000/')
+        self.driver.get('https://web.telegram.org/')
         time.sleep(2)
 
         login_page = LoginPage(self.driver)
